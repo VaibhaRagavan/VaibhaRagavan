@@ -2,6 +2,8 @@ from flask import Flask,request,rendertemplate
 import datetime
 import dayscalculator
 
+app = Flask(__name__)
+
 @app.route("/calculator", methods=["POST", "GET"])
 def res():
     if request.method == "POST":
@@ -13,3 +15,6 @@ def res():
         return render_template("date.html", calculator=result, date1=date1, date2=date2)
     else:
         return render_template("date.html")
+
+if __name__ == "__main__":
+    app.run(debug=True, use_debugger=False, use_reloader=False)
