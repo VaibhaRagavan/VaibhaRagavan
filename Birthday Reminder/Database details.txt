@@ -1,0 +1,4 @@
+My database having 3 tables:
+Table1-eventdetails (to store the dateofbirth)
+Table2-userdetails(to store usersdetails)
+Table3-favourites(to store user who subscribed to events)
