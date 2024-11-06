@@ -6,7 +6,7 @@ import datetime
 
 hostname='localhost'
 user='root'
-database='mydatabase'
+database='your_database'
 
 db=pymysql.connections.Connection(host=hostname,user=user,database=database)
 mycursor=db.cursor()
@@ -19,19 +19,19 @@ def sendwish(name,email):
     
     s = smtplib.SMTP('smtp.gmail.com', 587)
     s.starttls()
-    s.login("vaibhavijayvidhun@gmail.com","novo gdnp zlvy iaoz")
+    s.login("your_emailid")
     message="Wish you a Happy Birthday "+name +"from the Birthday calender site"
-    s.sendmail("vaibhavijayvidhun@gmail.com",email,message)
+    s.sendmail("your_emailid",email,message)
     s.quit()
 
 def sendemailtoothers(l_id,person_name):
 
     s = smtplib.SMTP('smtp.gmail.com', 587)
     s.starttls()
-    s.login("vaibhavijayvidhun@gmail.com","novo gdnp zlvy iaoz")
+    s.login("your_emailid")
     message="This is  the reminder from Birthday calender site . we would like to remind you that today is"+ person_name +" birthday wish him a happy birthday"
 
-    s.sendmail("vaibhavijayvidhun@gmail.com",l_id,message)
+    s.sendmail("your_emailid",l_id,message)
     s.quit()
 
 today_month=datetime.datetime.now().month
