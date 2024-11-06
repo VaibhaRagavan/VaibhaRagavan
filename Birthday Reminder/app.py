@@ -26,14 +26,14 @@ from sqlentry import fav_details, getu_id
 
 hostname = "localhost"
 user = "root"
-database = "mydatabase"
+database = "enter your database"
 
 db = pymysql.connections.Connection(host=hostname, user=user, database=database)
 mycursor = db.cursor()
 
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root@localhost/mydatabase"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root@localhost/your_database"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = "abcde"
 db = SQLAlchemy(app)
@@ -55,11 +55,6 @@ def favdb():
     )
     fv_name = mycursor.fetchall()
     return jsonify(fv_name)
-
-
-@app.route("/homepage")
-def Home_page():
-    return render_template("home.html")
 
 
 @app.route("/homedb", methods=["GET", "POST"])
@@ -178,10 +173,10 @@ def verfication():
 
         s = smtplib.SMTP("smtp.gmail.com", 587)
         s.starttls()
-        s.login("vaibhavijayvidhun@gmail.com", "novo gdnp zlvy iaoz")
+        s.login("your_email id ")
         msg = "The verfication code to change pasword for birthday calender is" + code
 
-        s.sendmail("vaibhavijayvidhun@gmail.com", emailid, msg)
+        s.sendmail("your_emailid", emailid, msg)
         s.quit()
         return redirect(url_for("update", code=code))
     else:
@@ -246,46 +241,6 @@ def fav():
         )
         mycursor.connection.commit()
     return render_template("fav.html")
-
-
-@app.route("/longlat", methods=["POST", "GET"])
-def longlat():
-    if request.method == "POST":
-        area = request.form["area"]
-        locationcoor = loc.location(area)
-        locationcoor_list = list(locationcoor)
-        return render_template(
-            "locres.html",
-            locationcoor1=locationcoor_list,
-            lat=locationcoor[2],
-            long=locationcoor[1],
-        )
-    else:
-        return render_template("loc.html")
-
-
-@app.route("/calculator", methods=["POST", "GET"])
-def res():
-    if request.method == "POST":
-        date1 = request.form["first date"]
-        date2 = request.form["second date"]
-        enterdate1 = dayscalculator.date_fun(date1)
-        enterdate2 = dayscalculator.date_fun(date2)
-        result = dayscalculator.res_days(enterdate1, enterdate2)
-        return render_template("date.html", calculator=result, date1=date1, date2=date2)
-    else:
-        return render_template("date.html")
-
-
-@app.route("/search", methods=["GET", "POST"])
-def search():
-    if request.method == "POST":
-        word = request.form["keyword"]
-        page = dict_search.api_call(word)
-        display = dict_search.text_processor(page)
-        return render_template("search.html", response1=display)
-    else:
-        return render_template("index.html")
 
 
 if __name__ == "__main__":
