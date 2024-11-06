@@ -76,10 +76,6 @@
                     tableBody.innerHTML = "";
                     listofnames.forEach(name => {
                         const row = document.createElement('tr');
-                        const icon = document.createElement('td');
-                        const icon_img=document.createElement('img');
-                        icon_img.src="https://icons8.com/icon/23264/user";
-
                         const namecell = document.createElement('td');
                         namecell.textContent = name;
                         const actioncell = document.createElement('td');
@@ -95,7 +91,7 @@
                             button.textContent = "Subscribe";
                             button.onclick = function () {
                                 let n_row = button.parentNode.parentNode;
-                                let selected_name = n_row.cells[1].textContent;
+                                let selected_name = n_row.cells[0].textContent;
                                 alert(selected_name + "added to your favorites")
                                 button.textContent = "Subscribed"
                                 $.ajax({
@@ -108,7 +104,6 @@
                         }
 
                         actioncell.appendChild(button);
-                        row.appendChild(icon);
                         row.appendChild(namecell);
                         row.appendChild(actioncell);
                         
