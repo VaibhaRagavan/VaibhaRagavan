@@ -1,0 +1,31 @@
+<head>
+    <h1>ENTER YOUR DETAILS</h1>
+</head>
+<script>
+    function click(){
+
+    
+    var cont=document.getElementById("tq")
+    cont.textContent="Thank you for adding details"
+    console.log(cont)
+    }
+</script>
+<body style="text-align: center;">
+    <p id="tq"> PLEASE FILL THE FORM TO ADD PEOPLES</p>
+    <form method="POST" action="/entry">
+
+    Enter your name:
+    <input id="name" type="text" name="name" placeholder="enter your name"><br>
+    Select your gender:<br>
+    <input id="gender1" type="checkbox" name="genderbox" value="F">
+    <label for="gender1">Female </label><br>
+    <input id="gender2" type="checkbox" name="genderbox" value="M">
+    <label for="gender2">Male</label><br>
+    Enter your dateofbirth:
+    <input id="dob" type="text" name="dob" placeholder="YYYY-MM-DD"><br>
+    
+    <input  value="submit" type="submit" name='submit' onclick=click()>
+
+    </form>
+    
+</body>

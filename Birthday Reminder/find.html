@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<h1>
+    You can find your friends and family birthday date by searching their name/month/date.
+</h1>
+<style src="../templates/style.css">
+</style>
+
+<body>
+    
+    Enter the details<br>
+    <div class="search-box">
+        <div class="row">
+            <form method="POST" action="/view">
+                <input type="search" name="enter" placeholder="enter name" id="tags" autocomplete="off">
+                <input type="submit" name="search" id="ok">
+                <hr>
+                <input type="search" name="month" placeholder="enter month" id="tags1" autocomplete="off">
+                <input type="submit" name="search1" id="ok1" >
+                <hr>
+                <input type="search" name="date" placeholder="enter date" id="tags2" autocomplete="off">
+                <input type="submit" name="search2" id="ok2">
+                <hr>
+            </form>
+            
+        </div>
+        <div class="result-box">
+
+        </div>
+    </div>
+<script type='text/javascript' src='../static/autocomplete.js'> </script>
+</body>
+<hr>
+<table border="3"> 
+    <th>NAME</th>
+    <th>GENDER</th>
+    <th>DATE OF BIRTH</th>
+    {% for items in view %}
+    <tr>
+     {%for details in items %}
+     <td>{{details}}</td>
+     {%endfor%}
+    </tr>
+    {%endfor%}
+</table>
+    

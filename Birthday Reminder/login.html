@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+    WELOCME TO B'DAY Calender
+</head>
+<style>
+    form{
+        align-items: center;
+    
+    }
+
+</style>
+<script>
+    function updateform(){
+        window.location.href="sendemailverfication"
+    }
+    function regform(){
+        window.location.href="newaccount"
+    }
+</script>
+<body>
+
+<div>
+<section id="login-page">
+    <form method="post" action="/login" >
+        <input type="text" name="email" id="mail" placeholder="enter your emailid"><br>
+        <input type="text" name="passwd" id="pass" placeholder="enter the password"><br>
+        <input type="submit" name="submit">
+        
+    </form>
+    <button id="pwd-page" onclick="updateform()">Forget password</button>
+</section>
+<p>Don't have a account</p><button id="reg-page" onclick="regform()">Register Here</button>
+</div>
+
+
+</body>
