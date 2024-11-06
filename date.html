@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+    <h1>
+        Days calculator
+    </h1>
+</head>
+<style>
+    h1{
+        text-align: center;
+        font-size: xx-large;
+        color:aqua;
+        margin-top: 3%;
+    }
+    h5#first,h5#second{
+        margin-left:40% ;
+        padding: 1%
+        
+    }
+    h4{
+        text-align: center;
+        color: black;
+    }
+    
+    form{
+        margin-top: 5%;
+    }
+    body{
+        margin-top: 3%;
+    }
+</style>
+<form method="POST" action="/calculator">
+<h5 id="first">
+    Enter the first date 
+
+    <input type="date" id="date 1" name="first date">
+</h5>
+<h5 id="second">
+    Enter the second date
+
+    <input type="date" id="date 2" name="second date">
+</h5>
+<h4>
+ <input type="submit" value="Submit" id="submit">
+</h4>
+</form>
+<body style="background-color: bisque;">
+    Number of days between  <b>{{date1}} </b> & <b> {{date2}} </b>is <b>{{calculator}}</b> days
+</body>
