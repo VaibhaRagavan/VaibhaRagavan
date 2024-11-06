@@ -1,7 +1,7 @@
 from datetime import date,datetime
 
 
-def date_fun(d):
+def date_fin(d):
     input_date = d
     format = "%Y-%m-%d"
     str2date=datetime.strptime(input_date,format)
