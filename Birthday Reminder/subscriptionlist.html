@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<head>
+    notify me
+    <style>
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <p> Are you forgetting your favorite birthday here is the birthday reminder,
+        subscribe to your favorite persons birthday and get notification.</p>
+    <table id="mytable" border="3">
+        <thead>
+            <tr>
+                <th>icon</th>
+                <th>NAME</th>
+                <th>Notify Me</th>
+                
+            </tr>
+        </thead>
+
+        <tbody id="table-body"></tbody>
+
+
+    </table>
+
+    <script>
+        function myloop(btindex) {
+
+            btvalue = btindex.closest('tr');
+
+            value = btvalue.cells[0].innerText;
+            alert("button clicked for " + value)
+
+        }
+        async function getdata() {
+            const resp = await fetch("/dblinkjs");
+            const data = await resp.json();
+            return data;
+        }
+
+        async function favdata() {
+            const resp_f = await fetch("/favdb");
+            const data_f = await resp_f.json();
+            return data_f;
+        }
+        getdata().then((data) => {
+            var listofnames = data.flat();
+            console.log(listofnames)
+            favdata().then((data_f) => {
+                var listoffav = data_f.flat();
+                console.log(listoffav)
+
+
+                function generateTable() {
+                    const tableBody = document.getElementById("table-body");
+                    tableBody.innerHTML = "";
+                    listofnames.forEach(name => {
+                        const row = document.createElement('tr');
+                        const icon = document.createElement('td');
+                        const icon_img=document.createElement('img');
+                        icon_img.src="https://icons8.com/icon/23264/user";
+
+                        const namecell = document.createElement('td');
+                        namecell.textContent = name;
+                        const actioncell = document.createElement('td');
+                        const button = document.createElement('button');
+
+                        if (listoffav.includes(name)) {
+                            button.textContent = "Subscribed";
+                            button.onclick = function () {
+                                alert("already in list ")
+                            };
+                        }
+                        else {
+                            button.textContent = "Subscribe";
+                            button.onclick = function () {
+                                let n_row = button.parentNode.parentNode;
+                                let selected_name = n_row.cells[1].textContent;
+                                alert(selected_name + "added to your favorites")
+                                button.textContent = "Subscribed"
+                                $.ajax({
+                                    url: "/favorite",
+                                    type: "POST",
+                                    contentType: "application/json",
+                                    data: JSON.stringify(selected_name)
+                                })
+                            }
+                        }
+
+                        actioncell.appendChild(button);
+                        row.appendChild(icon);
+                        row.appendChild(namecell);
+                        row.appendChild(actioncell);
+                        
+
+                        tableBody.appendChild(row);
+                    });
+
+
+                }
+                generateTable();
+            })
+
+        })
+
+
+
+
+    </script>
+
+
+
+</body>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<h1>FAVORITES</h1>
+<body>
+    <table border="3">
+    {%for items in f_name%}
+    <tr>
+    {%for name in items%}
+    <td>{{name}}</td>
+    {%endfor%}
+    {%endfor%}
+</tr>
+</table>
+</body>
