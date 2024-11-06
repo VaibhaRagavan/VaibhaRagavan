@@ -86,34 +86,6 @@ def login():
         else:
             return "Incorrect id/password"
 
-
-@app.route("/mainpage")
-def mainpage():
-
-    return render_template("mainpage.html", out=session["user"])
-
-
-@app.route("/logout")
-def logout():
-    session.pop("loggedin", None)
-    return render_template("login.html")
-
-
-@app.route("/subscribe", methods=["GET", "POST"])
-def subscribe():
-    if request.method == "GET":
-        mycursor.execute("SELECT name FROM eventdetails")
-        n_list = mycursor.fetchall()
-        u1_name = session["user"]
-        mycursor.execute(
-            "SELECT eventdetails.name FROM((favorites INNER JOIN userdetails ON userdetails.userid=favorites.userid)INNER JOIN eventdetails ON eventdetails.id=favorites.u_id)WHERE userdetails.user=%s",
-            u1_name,
-        )
-        fv_name = mycursor.fetchall()
-
-        return render_template("subscriptionlist.html", n_list=n_list, fv_name=fv_name)
-
-
 @app.route("/newaccount", methods=["POST", "GET"])
 def newaccount():
     if request.method == "POST":
@@ -133,35 +105,10 @@ def newaccount():
         return render_template("reg.html")
 
 
-@app.route("/entry", methods=["POST", "GET"])
-def display():
-    if request.method == "POST":
-        name_1 = request.form["name"]
-        dob_1 = request.form["dob"]
-        value = request.form["genderbox"]
-        if value == "F":
-            gender_1 = "F"
-        else:
-            gender_1 = "M"
-        id_1 = uuid.uuid4()
+@app.route("/mainpage")
+def mainpage():
 
-        def entered(n, g, d, id):
-            {
-                mycursor.execute(
-                    "INSERT INTO eventdetails (name,gender,dateofbirth,id) values(%s,%s,%s,%s)",
-                    (n, g, d, id),
-                )
-            }
-
-        entered(name_1, gender_1, dob_1, id_1)
-        mycursor.connection.commit()
-        res = mycursor.fetchall()
-        data = list(res)
-
-        return render_template("entry.html", data=data)
-    else:
-        return render_template("entry.html")
-
+    return render_template("mainpage.html", out=session["user"])
 
 @app.route("/sendemailverfication", methods=["POST", "GET"])
 def verfication():
@@ -202,6 +149,61 @@ def update():
         data = request.args.get("code")
         session["value"] = data
         return render_template("update.html")
+
+
+    
+@app.route("/logout")
+def logout():
+    session.pop("loggedin", None)
+    return render_template("login.html")
+
+
+@app.route("/subscribe", methods=["GET", "POST"])
+def subscribe():
+    if request.method == "GET":
+        mycursor.execute("SELECT name FROM eventdetails")
+        n_list = mycursor.fetchall()
+        u1_name = session["user"]
+        mycursor.execute(
+            "SELECT eventdetails.name FROM((favorites INNER JOIN userdetails ON userdetails.userid=favorites.userid)INNER JOIN eventdetails ON eventdetails.id=favorites.u_id)WHERE userdetails.user=%s",
+            u1_name,
+        )
+        fv_name = mycursor.fetchall()
+
+        return render_template("subscriptionlist.html", n_list=n_list, fv_name=fv_name)
+
+
+
+
+@app.route("/entry", methods=["POST", "GET"])
+def display():
+    if request.method == "POST":
+        name_1 = request.form["name"]
+        dob_1 = request.form["dob"]
+        value = request.form["genderbox"]
+        if value == "F":
+            gender_1 = "F"
+        else:
+            gender_1 = "M"
+        id_1 = uuid.uuid4()
+
+        def entered(n, g, d, id):
+            {
+                mycursor.execute(
+                    "INSERT INTO eventdetails (name,gender,dateofbirth,id) values(%s,%s,%s,%s)",
+                    (n, g, d, id),
+                )
+            }
+
+        entered(name_1, gender_1, dob_1, id_1)
+        mycursor.connection.commit()
+        res = mycursor.fetchall()
+        data = list(res)
+
+        return render_template("entry.html", data=data)
+    else:
+        return render_template("entry.html")
+
 
 
 @app.route("/view", methods=["GET", "POST"])
