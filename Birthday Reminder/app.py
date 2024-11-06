@@ -93,10 +93,11 @@ def newaccount():
         email_id = request.form["em"]
         phoneno = request.form["phn"]
         pswd = request.form["pwd"]
+        Dob=request.form["dob"]
 
         mycursor.execute(
             "INSERT INTO userdetails (name,emailid,phonenumber,password) values(%s,%s,%s,%s)",
-            (username, email_id, phoneno, pswd),
+            (username, email_id, phoneno, pswd,Dob),
         )
         mycursor.connection.commit()
 
