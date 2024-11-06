@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+        <style>
+            html, body {
+              height: 100%;
+            }
+            
+            img.one {
+              height: auto;
+              width: auto;
+            }
+            
+            img.two {
+              height: 2%;
+              width: 30%;
+              display: block;
+             margin-left: auto;
+             margin-right: auto;
+            }
+            </style>
+</head>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 style="text-align:center;">
+            <font size="25">
+                Dictinoary
+            </font>
+        </h1>
+        <img class="two" src="https://media.hswstatic.com/eyJidWNrZXQiOiJjb250ZW50Lmhzd3N0YXRpYy5jb20iLCJrZXkiOiJnaWZcL2RpY3Rpb25hcnkuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjo4Mjh9LCJ0b0Zvcm1hdCI6ImF2aWYifX0=",width="1000", height="200">
+    </div>
+
+    <form method="POST" action="/search">
+        <h4>
+            Enter the Word
+        </h4>
+        <search>
+            <input type="text" width="100" name='keyword' placeholder="Enter the word">
+            <input value="search" type="submit" name='submit'>
+        </search>
+    </form>
+</div>
