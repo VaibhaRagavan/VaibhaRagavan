@@ -1,6 +1,6 @@
 My database contains 4 tables:
 Table1-eventdetails (name,gender,dob,u_id)
-Table2-userdetails(user,userid,phno,emailid,pwd)
+Table2-userdetails(user,userid,phno,emailid,pwd,dob)
 Table3-favourites(userid,u_id)
 Table4-userinevent(user,u_id)
 
