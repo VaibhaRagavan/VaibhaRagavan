@@ -12,9 +12,6 @@ from flask import (
 import flask
 import requests
 import json
-import dict_search
-import dayscalculator
-import loc
 import pymysql
 import datetime
 import re
@@ -39,13 +36,24 @@ app.config["SECRET_KEY"] = "abcde"
 db = SQLAlchemy(app)
 
 
+"""Fetch name for markme list"""
+@app.route("/dbnames",methods=["GET"])
+def dbname():
+    mycursor.execute("SELECT name FROM eventdetails")
+    data=mycursor.fetchall()
+    return jsonify(data)
+
+"""To fetch names for the subscription html"""
 @app.route("/dblinkjs", methods=["GET"])
 def dbjs():
-    mycursor.execute("SELECT name FROM eventdetails")
+    user=session['user']
+    mycursor.execute("SELECT eventid FROM userinevent WHERE username=%s",user)
+    id=mycursor.fetchone()
+    mycursor.execute("SELECT name FROM eventdetails WHERE NOT id=%s",id)
     data = mycursor.fetchall()
     return jsonify(data)
 
-
+"""To fetch names already in the fav for subscription html"""
 @app.route("/favdb", methods=["GET"])
 def favdb():
     u1_name = session["user"]
@@ -56,7 +64,7 @@ def favdb():
     fv_name = mycursor.fetchall()
     return jsonify(fv_name)
 
-
+"""LOGIN PAGE"""
 @app.route("/homedb", methods=["GET", "POST"])
 def home():
     if request.method == "GET":
@@ -85,7 +93,7 @@ def login():
             return redirect(url_for("mainpage"))
         else:
             return "Incorrect id/password"
-
+"""REG NEW ACCOUNT"""
 @app.route("/newaccount", methods=["POST", "GET"])
 def newaccount():
     if request.method == "POST":
@@ -104,13 +112,9 @@ def newaccount():
         return render_template("login.html")
     else:
         return render_template("reg.html")
+        
 
-
-@app.route("/mainpage")
-def mainpage():
-
-    return render_template("mainpage.html", out=session["user"])
-
+"""OTP TO verify user to change password"""
 @app.route("/sendemailverfication", methods=["POST", "GET"])
 def verfication():
     if request.method == "POST":
@@ -151,14 +155,36 @@ def update():
         session["value"] = data
         return render_template("update.html")
 
-
-    
+"""LOGOUT"""
 @app.route("/logout")
 def logout():
     session.pop("loggedin", None)
     return render_template("login.html")
 
+"""HOME PAGE """
+@app.route("/mainpage")
+def mainpage():
 
+    return render_template("mainpage.html", out=session["user"])
+
+"""MARK USER IN EVENT """
+
+@app.route("/markme",methods=["GET","POST"])
+def markme():
+    if request.method=="GET":
+        return render_template("markme.html")
+    else:
+        u_name=request.get_json()
+        mycursor.execute("SELECT id FROM eventdetails WHERE name=%s", u_name)
+        eventid=mycursor.fetchone()
+        print(eventid)
+        u_name=session['user']
+        mycursor.execute("INSERT INTO userinevent(username,eventid) values(%s,%s)",(u_name,eventid))
+        mycursor.connection.commit()
+        return render_template("mainpage.html")
+    
+
+"""Subscribe to your fav"""
 @app.route("/subscribe", methods=["GET", "POST"])
 def subscribe():
     if request.method == "GET":
@@ -173,9 +199,7 @@ def subscribe():
 
         return render_template("subscriptionlist.html", n_list=n_list, fv_name=fv_name)
 
-
-
-
+"""NEW ENTRY TO THE EVENT"""
 @app.route("/entry", methods=["POST", "GET"])
 def display():
     if request.method == "POST":
@@ -205,7 +229,7 @@ def display():
     else:
         return render_template("entry.html")
 
-
+"""SEARCH FOR BIRTHDAY """
 
 @app.route("/view", methods=["GET", "POST"])
 def finding():
@@ -223,7 +247,7 @@ def finding():
     else:
         return render_template("find.html")
 
-
+"""YOUR FAV LIST """
 @app.route("/favorite", methods=["POST", "GET"])
 def fav():
     if request.method == "GET":
