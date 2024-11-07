@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<head>
+    MARK ME
+    <style>
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    
+    <table id="mytable" border="3">
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th> MARK ME</th>
+
+
+            </tr>
+        </thead>
+
+        <tbody id="table-body"></tbody>
+
+
+    </table>
+
+    <script>
+
+        async function getdata() {
+            const resp = await fetch("/dbnames");
+            const data = await resp.json();
+            return data;
+        }
+
+        getdata().then((data) => {
+            var listofnames = data.flat();
+            function generateTable() {
+                const tableBody = document.getElementById("table-body");
+                tableBody.innerHTML = "";
+                listofnames.forEach(name => {
+                    const row = document.createElement('tr');
+
+                    const namecell = document.createElement('td');
+                    namecell.textContent = name;
+
+                    const actioncell = document.createElement('td');
+                    const mark_button = document.createElement('button');
+                    mark_button.textContent = "MARK ME";
+                    mark_button.onclick = function () {
+                        let row = mark_button.parentNode.parentNode;
+                        var user_name = row.cells[0].textContent;
+                        mark_button.textContent = "MARKED AS YOU"
+                        $.ajax({
+                            url: "/markme",
+                            type: "POST",
+                            contentType: "application/json",
+                            data: JSON.stringify(user_name)
+
+                        })
+                    };
+                    actioncell.appendChild(mark_button);
+                    row.appendChild(namecell);
+                    row.appendChild(actioncell);
+
+
+
+                    tableBody.appendChild(row);
+                });
+
+
+            }
+            generateTable();
+       
+        })
+            
+
+    
+
+
+
+
+    </script>
+
+
+
+</body>
