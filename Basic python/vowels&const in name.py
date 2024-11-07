@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 vowel_count = 0
 consonsnts_count = 0
-name_list = ["VaIBHa", "ViJaY", "VIDHuN"]
+name_list = ["James", "ViJaY", "leo"]
 VOWEL = ["A", "E", "I", "O", "U"]
 for name in name_list:
     vowel_count = 0
