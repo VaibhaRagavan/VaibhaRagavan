@@ -1,5 +1,4 @@
 from geopy.geocoders import Nominatim
-from geopy.exc import GeocoderTimedOut, GeocoderServiceError, GeocoderUnavailable
 from timezonefinder import TimezoneFinder
 import json, requests
 
