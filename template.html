@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WEATHER</title>
+    </head>
+    <body>
+        Current_data
+        <p>Time:{{.Currentweather.Time}}</p>
+         <p>Temperature:{{.Currentweather.Temperature}}</p>
+         <p>Windspeed:{{.Currentweather.Windspeed}}</p>
+         
+
+        Hourly_forecast
+        <table border="4">
+            <tr>
+                <th>Time</th>
+                <th>Temperature</th>
+                <th>Rain</th>
+            </tr>
+            {{range $index, $time := .Hourly.Time}}
+            <tr>
+            <td>{{$time}}</td>
+            <td>{{index $.Hourly.Temperature  $index}}</td>
+            <td>{{index $.Hourly.Rain $index}}</td>
+       </tr>
+       {{end}}
+        </table>
+    </body>
+</html>
