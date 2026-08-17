@@ -57,7 +57,7 @@ Smaller projects that trace my path from classical ML to agentic AI — each one
 
 ### 🛠️ Tech Stack
 
-**Languages:** Python, JavaScript
+**Languages:** Python
 **AI/ML:** LangGraph, LangChain, Bedrock, Hugging Face Transformers, TensorFlow, scikit-learn
 **Cloud:** AWS Lambda, API Gateway, DynamoDB, S3, Cognito, EventBridge, SAM
 **Vector/Search:** Pinecone, ChromaDB, sentence-transformers
