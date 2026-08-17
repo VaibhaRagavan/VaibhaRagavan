@@ -35,6 +35,8 @@ plus a PDF-based RAG Q&A tab. Session-scoped Pinecone namespaces with scheduled 
 
 **Stack:** Streamlit · AWS Bedrock (Nova + Titan Embed) · AWS Transcribe · S3 · Pinecone · pdfplumber · LangSmith
 
+🔗 [Live Demo](https://polygist-glodyt8qrvc8rxm29jnz2k.streamlit.app/)
+
 
 ---
 
