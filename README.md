@@ -25,14 +25,16 @@ and running it all on AWS Bedrock.
 #### 🧠 [AgentCore](https://github.com/VaibhaRagavan/AgentCore) — Multi-Agent LangGraph System
 A production-style multi-agent system (orchestrator, collector, verifier, narrator agents) built on
 AWS Bedrock, using MCP for tool management, with a Streamlit chat interface.
-**Stack:** LangGraph · AWS Bedrock (`converse` API) · MCP · Streamlit · DynamoDB · Cognito
-🔗 *Live demo coming soon*
 
-#### 🎞️ [Multimodal AI Summarizer](https://github.com/VaibhaRagavan/Aws-Multimodal-Summary) — Cloud Multimodal Pipeline
-Serverless pipeline that summarizes images, audio, and video using Amazon Rekognition, Transcribe,
-and Bedrock — now being extended with PDF RAG-based summary and Q&A.
-**Stack:** AWS Lambda · Rekognition · Transcribe · Bedrock · S3
-🔗 *Live demo coming soon*
+**Stack:** LangGraph · AWS Bedrock (`converse` API) · MCP · Streamlit · DynamoDB · Cognito
+
+
+#### 📝 [Polygist](https://github.com/VaibhaRagavan/Polygist) — Multimodal Summary & RAG Q&A App
+A Streamlit app that summarizes PDFs, images, audio, video, and URLs (including YouTube) in one place,
+plus a PDF-based RAG Q&A tab. Session-scoped Pinecone namespaces with scheduled cleanup via GitHub Actions.
+
+**Stack:** Streamlit · AWS Bedrock (Nova + Titan Embed) · AWS Transcribe · S3 · Pinecone · pdfplumber · LangSmith
+
 
 ---
 
