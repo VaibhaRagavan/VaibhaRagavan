@@ -49,6 +49,7 @@ Smaller projects that trace my path from classical ML to agentic AI — each one
 | [Amazon_TopRated_Product](https://github.com/VaibhaRagavan/Amazon_TopRated_Product) | Word2Vec embeddings and cosine similarity search |
 | [aws-doc-rag-search](https://github.com/VaibhaRagavan/aws-doc-rag-search) | Local RAG pipeline with ChromaDB and sentence-transformers |
 | [RTE-News-Bot](https://github.com/VaibhaRagavan/Rte-News-Bot) | Cloud-native RAG — Pinecone, Bedrock, EventBridge-scheduled ingestion & cleanup |
+| [Aws-Multimodal-Summary](https://github.com/VaibhaRagavan/Aws-Multimodal-Summary) | Local, no-UI AWS pipeline (Rekognition, Transcribe, Bedrock) summarizing images/audio/video — early version of what became Polygist |
 
 ---
 
